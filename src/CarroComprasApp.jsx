@@ -1,4 +1,4 @@
-import { getProducto } from "./services/productoService";
+import { getProducto/* , getProductos */ } from "./services/productoService";
 
 const CarroComprasApp = () => {
   const productoUno = getProducto();
@@ -7,6 +7,7 @@ const CarroComprasApp = () => {
   const productoCuatro = getProducto();
   const productoCinco = getProducto();
   const productoSeis = getProducto();
+  // const productos = getProductos();
 
   return (
     <>
@@ -19,6 +20,24 @@ const CarroComprasApp = () => {
             App de Carro de Compras construido en React.
           </p>
           <div className="row">
+
+            {/* {productos.map(({id,nombre,descripcion,precio}) => {
+              return (
+                <>
+                  <div className="col-4 my-2">
+                    <div className="card">
+                      <div className="card-header">{id} - {nombre}</div>
+                      <div className="card-body">
+                        <h5 className="card-title">{descripcion}</h5>
+                        <p className="card-text">{precio}</p>
+                        <button className="btn btn-primary">Agregar</button>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              );
+            })} */}
+
             <div className="col-4 my-2">
               <div className="card">
                 <div className="card-header">{productoUno.nombre}</div>
@@ -79,6 +98,7 @@ const CarroComprasApp = () => {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
         <div className="card my-3 mx-2 w-50">
