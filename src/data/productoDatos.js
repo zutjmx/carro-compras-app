@@ -13,18 +13,33 @@ const generaProducto = () => {
 
 const generaProductos = () => {
     const arrProductos = [];
-    for (let index = 0; index < 10; index++) {
-        //const element = array[index];
+    const numerosIds = generaArrNumerico();
+    
+    for (let index = 0; index < numerosIds.length; index++) {
         const producto = {
-            id: faker.number.int({min:100,max:200}),
+            id: numerosIds[index],
             nombre: faker.commerce.product(),
             descripcion: faker.commerce.productDescription(),
-            //precioLabel: faker.number.int({min:100,max:200}).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' }),
             precio: faker.number.int({min:100,max:200})
         }
         arrProductos.push(producto);
     }
+
     return arrProductos;
+}
+
+const generaArrNumerico = () => {
+    let numeros = [];
+    //Se llena un arreglo de núemros
+    for (let index = 0; index < 9; index++) {
+        const numero = faker.number.int({min:100,max:200});
+        numeros.push(numero);
+    }
+    //Se quitan duplicados con filter
+    let resultado = numeros.filter((item,index)=>{
+        return numeros.indexOf(item) === index;
+    });
+    return resultado;
 }
 
 export {
