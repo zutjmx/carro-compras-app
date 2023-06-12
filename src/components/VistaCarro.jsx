@@ -1,9 +1,16 @@
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { calcularTotal } from '../services/productoService';
 
 export const VistaCarro = ({handlerBorrar, items}) => {
 
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    setTotal(calcularTotal(items));
+  }, [items]);
+
   const onBorrarProducto = (id) => {
-    //console.log('Entró a eliminar producto con id: ', id);
     handlerBorrar(id);
   }
 
@@ -44,10 +51,10 @@ export const VistaCarro = ({handlerBorrar, items}) => {
           <tfoot>
             <tr>
               <td colSpan={3} align="center" className="fw-bold">
-                <strong>Total</strong>
+                <strong>Total:</strong>
               </td>
               <td colSpan={2} align="left" className="fst-italic">
-                1200
+                {total}
               </td>
             </tr>
           </tfoot>
