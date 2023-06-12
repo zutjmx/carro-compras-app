@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 export const VistaProductosCatItem = ({handler,id,nombre,descripcion,precio}) => {
   
   const onAdicionarProducto = (producto) => {
-    console.log('Producto: ', producto);
     handler(producto);
   }
 

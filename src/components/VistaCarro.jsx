@@ -1,6 +1,11 @@
 import PropTypes from 'prop-types';
 
-export const VistaCarro = ({items}) => {
+export const VistaCarro = ({handlerBorrar, items}) => {
+
+  const onBorrarProducto = (id) => {
+    //console.log('Entró a eliminar producto con id: ', id);
+    handlerBorrar(id);
+  }
 
   return (
     <>
@@ -27,7 +32,11 @@ export const VistaCarro = ({items}) => {
                 <td>{item.cantidad}</td>
                 <td>{item.producto.precio * item.cantidad}</td>
                 <td>
-                  <button className="btn btn-danger">Eliminar</button>
+                  <button className="btn btn-danger" 
+                          onClick={() => onBorrarProducto(item.producto.id)}
+                  >
+                    Eliminar
+                  </button>
                 </td>
               </tr>
             ))}
@@ -49,5 +58,6 @@ export const VistaCarro = ({items}) => {
 }
 
 VistaCarro.propTypes = {
-  items: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired,
+  handlerBorrar: PropTypes.any.isRequired
 }

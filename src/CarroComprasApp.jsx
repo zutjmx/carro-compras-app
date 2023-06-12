@@ -2,6 +2,7 @@ import { VistaProductosCat } from './components/VistaProductosCat';
 import { VistaCarro } from './components/VistaCarro';
 import { getCarroItemsvacio } from './services/productoService';
 import { useState } from 'react';
+import Swal from 'sweetalert2'
 
 const CarroComprasApp = () => {
 
@@ -41,6 +42,24 @@ const CarroComprasApp = () => {
     
   }
 
+  const handlerBorrarProductoCarro = (id) => {
+    Swal.fire({
+      title: `¿Desea eliminar el producto con ID: ${id}?`,
+      showDenyButton: true,
+      confirmButtonText: 'Borrar',
+      denyButtonText: `No Borrar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setCarroItems([
+          ...carroItems.filter((i) => i.producto.id !== id)
+        ]);
+        Swal.fire('Borrado', '', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('No se borró', '', 'info')
+      }
+    })
+  }
+
   return (
     <>
       <div className="card my-3 mx-2">
@@ -53,9 +72,13 @@ const CarroComprasApp = () => {
           </p>          
           <VistaProductosCat handler={handlerAdicionarProductoCarro}/>          
         </div>
-        <div className="card my-3 mx-2 w-50">
-          <VistaCarro items={carroItems}/>
-        </div>
+        {carroItems?.length <= 0 ||
+          (
+            <div className="card my-3 mx-2 w-50">
+              <VistaCarro items={carroItems} handlerBorrar={handlerBorrarProductoCarro}/>
+            </div>
+          ) 
+        }
       </div>
     </>
   );

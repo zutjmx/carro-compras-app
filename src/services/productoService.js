@@ -6,7 +6,6 @@ export const getProducto = () => {
 
 export const getProductos = () => {
     const productos = generaProductos();
-    console.log('Productos: ', productos);
     return productos;
 }
 
