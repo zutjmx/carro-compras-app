@@ -1,9 +1,6 @@
-import { getProducto } from '../services/productoService';
+import PropTypes from 'prop-types';
 
-export const VistaCarro = () => {
-  const productoUno = getProducto();
-  const productoDos = getProducto();
-  const productoTres = getProducto();
+export const VistaCarro = ({items}) => {
 
   return (
     <>
@@ -23,33 +20,17 @@ export const VistaCarro = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>{productoUno.nombre}</td>
-              <td>{productoUno.precioLabel}</td>
-              <td>2</td>
-              <td>3</td>
-              <td>
-                <button className="btn btn-danger">Eliminar</button>
-              </td>
-            </tr>
-            <tr>
-              <td>{productoDos.nombre}</td>
-              <td>{productoDos.precioLabel}</td>
-              <td>2</td>
-              <td>3</td>
-              <td>
-                <button className="btn btn-danger">Eliminar</button>
-              </td>
-            </tr>
-            <tr>
-              <td>{productoTres.nombre}</td>
-              <td>{productoTres.precioLabel}</td>
-              <td>2</td>
-              <td>3</td>
-              <td>
-                <button className="btn btn-danger">Eliminar</button>
-              </td>
-            </tr>
+            {items.map(item => (
+              <tr key={item.producto.id}>
+                <td>{item.producto.nombre}</td>
+                <td>{item.producto.precio}</td>
+                <td>{item.cantidad}</td>
+                <td>{item.producto.precio * item.cantidad}</td>
+                <td>
+                  <button className="btn btn-danger">Eliminar</button>
+                </td>
+              </tr>
+            ))}
           </tbody>
           <tfoot>
             <tr>
@@ -65,4 +46,8 @@ export const VistaCarro = () => {
       </div>
     </>
   );
+}
+
+VistaCarro.propTypes = {
+  items: PropTypes.array.isRequired
 }

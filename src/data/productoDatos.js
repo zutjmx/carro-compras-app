@@ -42,7 +42,24 @@ const generaArrNumerico = () => {
     return resultado;
 }
 
+const generaCarroItemsVacio = () => {
+    const carroItemsVacio = [
+        /* {
+            producto: {
+                id: faker.number.int({min:100,max:200}),
+                nombre: faker.commerce.product(),
+                descripcion: faker.commerce.productDescription(),
+                precio: faker.number.int({min:100,max:200})
+            },
+            cantidad: 0,
+            total: 0
+        } */
+    ];
+    return carroItemsVacio;
+}
+
 export {
     generaProducto,
-    generaProductos
+    generaProductos,
+    generaCarroItemsVacio
 }

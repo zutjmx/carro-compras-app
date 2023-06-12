@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getProductos } from "../services/productoService";
 import { VistaProductosCatItem } from './VistaProductosCatItem';
+import PropTypes from 'prop-types';
 
-export const VistaProductosCat = () => {
+export const VistaProductosCat = ({handler}) => {
   const [productos, setProductos] = useState([]);
   useEffect(() => {
     setProductos(getProductos());
@@ -16,6 +17,7 @@ export const VistaProductosCat = () => {
                                   nombre={p.nombre}
                                   descripcion={p.descripcion}
                                   precio={p.precio}
+                                  handler={handler}
             />
           </div>
         ))}
@@ -23,3 +25,7 @@ export const VistaProductosCat = () => {
     </>
   );
 };
+
+VistaProductosCat.propTypes = {
+  handler: PropTypes.any.isRequired
+}
