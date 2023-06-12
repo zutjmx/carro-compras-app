@@ -1,12 +1,12 @@
 import { VistaProductosCat } from './components/VistaProductosCat';
 import { VistaCarro } from './components/VistaCarro';
-import { getCarroItemsvacio } from './services/productoService';
+import { /* getCarroItemsvacio, */ getCarro } from './services/productoService';
 import { useState } from 'react';
 import Swal from 'sweetalert2'
 
 const CarroComprasApp = () => {
 
-  const [carroItems,setCarroItems] = useState(getCarroItemsvacio());
+  const [carroItems,setCarroItems] = useState(getCarro());
 
   const handlerAdicionarProductoCarro = (producto) => {
     const existeItem = carroItems.find((i) => i.producto.id === producto.id);

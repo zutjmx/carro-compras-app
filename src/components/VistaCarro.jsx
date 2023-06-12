@@ -8,6 +8,7 @@ export const VistaCarro = ({handlerBorrar, items}) => {
 
   useEffect(() => {
     setTotal(calcularTotal(items));
+    sessionStorage.setItem('miCarro', JSON.stringify(items));
   }, [items]);
 
   const onBorrarProducto = (id) => {
