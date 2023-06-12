@@ -8,14 +8,37 @@ const CarroComprasApp = () => {
   const [carroItems,setCarroItems] = useState(getCarroItemsvacio());
 
   const handlerAdicionarProductoCarro = (producto) => {
-    setCarroItems([
-      ...carroItems, 
-      {
-        producto,
-        cantidad: 1,
-        total: producto.precio * 1
-      }
-    ]);
+    const existeItem = carroItems.find((i) => i.producto.id === producto.id);
+    
+    if(existeItem) {
+      //Usando filter
+      /* setCarroItems([
+        ...carroItems.filter((i) => i.producto.id !== producto.id),
+        {
+          producto,
+          cantidad: existeItem.cantidad + 1,
+        }
+      ]); */
+      //Usando map
+      setCarroItems(
+        carroItems.map((i) => {
+          if(i.producto.id === producto.id) {
+            i.cantidad = i.cantidad +1;
+          }
+          return i;
+        })
+      );
+    } else {
+      setCarroItems([
+        ...carroItems, 
+        {
+          producto,
+          cantidad: 1,
+          //total: producto.precio * 1
+        }
+      ]);
+    }
+    
   }
 
   return (
