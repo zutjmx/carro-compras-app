@@ -12,3 +12,7 @@ export const getProductos = () => {
 export const getCarroItemsvacio = () => {
     return generaCarroItemsVacio();
 }
+
+export const calcularTotal = (items) => {
+    return items.reduce((acumulador, item) => acumulador + (item.producto.precio*item.cantidad), 0);
+}
