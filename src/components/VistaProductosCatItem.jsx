@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { formateaNumeroMoneda } from '../services/productoService';
 
 export const VistaProductosCatItem = ({handler,id,nombre,descripcion,precio}) => {
   
@@ -14,7 +15,7 @@ export const VistaProductosCatItem = ({handler,id,nombre,descripcion,precio}) =>
         </div>
         <div className="card-body">
           <h5 className="card-title">{descripcion}</h5>
-          <p className="card-text">{precio}</p>
+          <p className="card-text">{formateaNumeroMoneda(precio)}</p>
           <button className="btn btn-primary" 
                   onClick={() => onAdicionarProducto({id,nombre,descripcion,precio})}
           >

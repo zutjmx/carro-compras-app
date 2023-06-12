@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { calcularTotal } from '../services/productoService';
+import { calcularTotal, formateaNumeroMoneda } from '../services/productoService';
 
 export const VistaCarro = ({handlerBorrar, items}) => {
 
@@ -37,7 +37,7 @@ export const VistaCarro = ({handlerBorrar, items}) => {
                 <td>{item.producto.nombre}</td>
                 <td>{item.producto.precio}</td>
                 <td>{item.cantidad}</td>
-                <td>{item.producto.precio * item.cantidad}</td>
+                <td>{formateaNumeroMoneda(item.producto.precio * item.cantidad)}</td>
                 <td>
                   <button className="btn btn-danger" 
                           onClick={() => onBorrarProducto(item.producto.id)}
@@ -54,7 +54,7 @@ export const VistaCarro = ({handlerBorrar, items}) => {
                 <strong>Total:</strong>
               </td>
               <td colSpan={2} align="left" className="fst-italic">
-                {total}
+                {formateaNumeroMoneda(total)}
               </td>
             </tr>
           </tfoot>

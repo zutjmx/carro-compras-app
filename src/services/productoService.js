@@ -16,3 +16,7 @@ export const getCarroItemsvacio = () => {
 export const calcularTotal = (items) => {
     return items.reduce((acumulador, item) => acumulador + (item.producto.precio*item.cantidad), 0);
 }
+
+export const formateaNumeroMoneda = (numero) => {
+    return numero.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
+}
