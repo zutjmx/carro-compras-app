@@ -8,7 +8,7 @@ export const VistaCarro = ({handlerBorrar, items}) => {
 
   useEffect(() => {
     setTotal(calcularTotal(items));
-    sessionStorage.setItem('miCarro', JSON.stringify(items));
+    //sessionStorage.setItem('miCarro', JSON.stringify(items));
   }, [items]);
 
   const onBorrarProducto = (id) => {
@@ -36,7 +36,7 @@ export const VistaCarro = ({handlerBorrar, items}) => {
             {items.map(item => (
               <tr key={item.producto.id}>
                 <td>{item.producto.nombre}</td>
-                <td>{item.producto.precio}</td>
+                <td>{formateaNumeroMoneda(item.producto.precio)}</td>
                 <td>{item.cantidad}</td>
                 <td>{formateaNumeroMoneda(item.producto.precio * item.cantidad)}</td>
                 <td>

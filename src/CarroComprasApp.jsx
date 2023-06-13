@@ -2,12 +2,20 @@ import { VistaProductosCat } from './components/VistaProductosCat';
 import { VistaCarro } from './components/VistaCarro';
 import { getCarro } from './services/productoService';
 import Swal from 'sweetalert2'
-import { useReducer } from 'react';
+import { useReducer, useEffect } from 'react';
 import { itemsReducer } from './reducer/itemsReducer';
+import { ActualizarCantidadProductoCarro, 
+         AdicionarProductoCarro, 
+         BorrarProductoCarro 
+       } from './reducer/itemsActions';
 
 const CarroComprasApp = () => {
 
   const [carroItems, dispatch] = useReducer(itemsReducer, getCarro());
+
+  useEffect(() => {
+    sessionStorage.setItem('miCarro', JSON.stringify(carroItems));
+  }, [carroItems]);
 
   const handlerAdicionarProductoCarro = (producto) => {
     const existeItem = carroItems.find((i) => i.producto.id === producto.id);
@@ -15,14 +23,14 @@ const CarroComprasApp = () => {
     if(existeItem) {
       dispatch(
         {
-          type: 'ActualizarCantidadProductoCarro',
+          type: ActualizarCantidadProductoCarro,
           payload: producto
         }
       );
     } else {
       dispatch(
         {
-          type: 'AdicionarProductoCarro',
+          type: AdicionarProductoCarro,
           payload: producto
         }
       );
@@ -40,7 +48,7 @@ const CarroComprasApp = () => {
       if (result.isConfirmed) {
         dispatch(
           {
-            type: 'BorrarProductoCarro',
+            type: BorrarProductoCarro,
             payload: id
           }
         );
