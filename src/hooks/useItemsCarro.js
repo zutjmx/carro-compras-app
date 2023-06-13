@@ -30,7 +30,7 @@ export const useItemsCarro = () => {
           }
         );
       }
-      
+      Swal.fire('Cátalogo', 'Se agregó al carrito', 'success');
     }
   
     const handlerBorrarProductoCarro = (id) => {
