@@ -1,43 +1,31 @@
 import { VistaProductosCat } from './components/VistaProductosCat';
 import { VistaCarro } from './components/VistaCarro';
-import { /* getCarroItemsvacio, */ getCarro } from './services/productoService';
-import { useState } from 'react';
+import { getCarro } from './services/productoService';
 import Swal from 'sweetalert2'
+import { useReducer } from 'react';
+import { itemsReducer } from './reducer/itemsReducer';
 
 const CarroComprasApp = () => {
 
-  const [carroItems,setCarroItems] = useState(getCarro());
+  const [carroItems, dispatch] = useReducer(itemsReducer, getCarro());
 
   const handlerAdicionarProductoCarro = (producto) => {
     const existeItem = carroItems.find((i) => i.producto.id === producto.id);
     
     if(existeItem) {
-      //Usando filter
-      /* setCarroItems([
-        ...carroItems.filter((i) => i.producto.id !== producto.id),
+      dispatch(
         {
-          producto,
-          cantidad: existeItem.cantidad + 1,
+          type: 'ActualizarCantidadProductoCarro',
+          payload: producto
         }
-      ]); */
-      //Usando map
-      setCarroItems(
-        carroItems.map((i) => {
-          if(i.producto.id === producto.id) {
-            i.cantidad = i.cantidad +1;
-          }
-          return i;
-        })
       );
     } else {
-      setCarroItems([
-        ...carroItems, 
+      dispatch(
         {
-          producto,
-          cantidad: 1,
-          //total: producto.precio * 1
+          type: 'AdicionarProductoCarro',
+          payload: producto
         }
-      ]);
+      );
     }
     
   }
@@ -50,9 +38,12 @@ const CarroComprasApp = () => {
       denyButtonText: `No Borrar`,
     }).then((result) => {
       if (result.isConfirmed) {
-        setCarroItems([
-          ...carroItems.filter((i) => i.producto.id !== id)
-        ]);
+        dispatch(
+          {
+            type: 'BorrarProductoCarro',
+            payload: id
+          }
+        );
         Swal.fire('Borrado', '', 'success')
       } else if (result.isDenied) {
         Swal.fire('No se borró', '', 'info')
