@@ -14,8 +14,11 @@ export const useItemsCarro = () => {
   
     const handlerAdicionarProductoCarro = (producto) => {
       const existeItem = carroItems.find((i) => i.producto.id === producto.id);
+      let seAgrego = false;
+      let mensaje = '';
       
       if(existeItem) {
+        seAgrego = false;
         dispatch(
           {
             type: ActualizarCantidadProductoCarro,
@@ -23,6 +26,7 @@ export const useItemsCarro = () => {
           }
         );
       } else {
+        seAgrego = true;        
         dispatch(
           {
             type: AdicionarProductoCarro,
@@ -30,7 +34,12 @@ export const useItemsCarro = () => {
           }
         );
       }
-      Swal.fire('Cátalogo', 'Se agregó al carrito', 'success');
+      if (seAgrego) {
+        mensaje = 'Se agregó el producto en el carrito';
+      } else {
+        mensaje = 'Se actualizó la cantidad del producto en el carrito';
+      }
+      Swal.fire('Selección de productos', mensaje, 'success');
     }
   
     const handlerBorrarProductoCarro = (id) => {
