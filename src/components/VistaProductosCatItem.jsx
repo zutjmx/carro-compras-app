@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { formateaNumeroMoneda } from '../services/productoService';
 
 export const VistaProductosCatItem = ({handler,id,nombre,descripcion,precio}) => {
-  
+  const navigate = useNavigate();
   const onAdicionarProducto = (producto) => {
     handler(producto);
+    navigate('/carro');
   }
 
   return (

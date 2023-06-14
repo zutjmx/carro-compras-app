@@ -1,18 +1,23 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { calcularTotal, formateaNumeroMoneda } from '../services/productoService';
 
 export const VistaCarro = ({handlerBorrar, items}) => {
 
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTotal(calcularTotal(items));
-    //sessionStorage.setItem('miCarro', JSON.stringify(items));
   }, [items]);
 
   const onBorrarProducto = (id) => {
     handlerBorrar(id);
+  }
+
+  const onCatalogo = () => {
+    navigate('/catalogo');
   }
 
   return (
@@ -60,6 +65,9 @@ export const VistaCarro = ({handlerBorrar, items}) => {
             </tr>
           </tfoot>
         </table>
+        <button className="btn btn-primary" onClick={onCatalogo}>
+          Seguir Comprando
+        </button>
       </div>
     </>
   );
